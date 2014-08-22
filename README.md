@@ -367,6 +367,11 @@ views
 ## Customizing Cardboard
 
 ### Overwrite views
+
+Use Deface to Customize Your Views as Described here: ![Deface Github Page](https://github.com/spree/deface)
+
+**or**
+
 You can easily change the default behavior of the app by overwriting the views. For example say you'd like to change the my account page. Simply add a `views/cardboard/my_account/edit.html.slim` and edit it at will.
 
 ## Deploy with capistrano
