@@ -23,11 +23,11 @@ module Cardboard
       end
 
       def generate_view_files
-        empty_directory "app/views/cardboard/#{plural_table_name}"
-        template "#{options.markup}/index.html.slim", "app/views/cardboard/#{plural_table_name}/index.html.#{options.markup}"
-        template "#{options.markup}/_fields.html.slim", "app/views/cardboard/#{plural_table_name}/_fields.html.#{options.markup}"
-        template "#{options.markup}/edit.html.slim", "app/views/cardboard/#{plural_table_name}/edit.html.#{options.markup}"
-        template "#{options.markup}/new.html.slim", "app/views/cardboard/#{plural_table_name}/new.html.#{options.markup}"
+        empty_directory File.join(view_path, plural_table_name)
+        template "#{options.markup}/index.html.#{options.markup}", "#{view_path}/#{plural_table_name}/index.html.#{options.markup}"
+        template "#{options.markup}/_fields.html.#{options.markup}", "#{view_path}/#{plural_table_name}/_fields.html.#{options.markup}"
+        template "#{options.markup}/edit.html.#{options.markup}", "#{view_path}/#{plural_table_name}/edit.html.#{options.markup}"
+        template "#{options.markup}/new.html.#{options.markup}", "#{view_path}/#{plural_table_name}/new.html.#{options.markup}"
       end
 
       private

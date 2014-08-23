@@ -1,0 +1,32 @@
+<% unless options.overwrite %>
+  <!-- Do not edit these files they will be overwritted when you regenerate
+  views. To edit views use "Deface" or run the generator in overwrite mode. -->
+<% end %>
+
+<%%= cardboard_filters <%= singular_table_name.classify %>, :<%= fields.reject{|k| k[/(_at|^id)$/]}.first %> %>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr>
+    <% for field in fields %><th>
+      <%%= sort_link @q, :<%= field %> %>
+    </th>
+    <% end %>
+    <th>Actions</th>
+    </tr>
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr>
+        <% for field in fields %><td>
+          <%%= <% if field[/_at$/] %>l <% end %><%= singular_table_name %>.<%= field %> %>
+        </td>
+        <% end %><td>
+          <%%= link_to 'Edit', edit_cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>) %>
+          <%%= " | " %>
+          <%%= link_to 'Delete', cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>), data: { confirm: 'Are you sure?' }, method: :delete %>
+        </td>
+      </tr>
+    <%% end %>
+  </table>
+</div>
+
+<%%= paginate @<%= plural_table_name %> %>

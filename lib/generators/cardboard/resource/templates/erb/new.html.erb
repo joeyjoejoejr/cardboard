@@ -1,0 +1,10 @@
+<% unless options.overwrite %>
+  <!-- Do not edit these files they will be overwritted when you regenerate
+  views. To edit views use "Deface" or run the generator in overwrite mode. -->
+<% end %>
+
+<h1>New <%= singular_table_name.titleize %></h1>
+
+<%%= simple_form_for @<%= singular_table_name %>, url: cardboard_<%= plural_table_name %>_path, wrapper: "bootstrap" do |f| %>
+  <%%= render 'fields', f: f %>
+<%% end %>
