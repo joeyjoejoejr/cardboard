@@ -2,7 +2,7 @@ module Cardboard
   module Generators
     class ResourceGenerator < Rails::Generators::Base
       desc "Scaffold a Cardboard resource"
-      argument :resource_name, :type => :string
+      argument :resource_name, type: :string
       #TODO: option for haml
       class_option  :markup, type: :string, default: "erb", desc: "Erb and slim available"
       class_option  :overwrite, type: :boolean, default: false , desc: "Use to overwrite default views. You will not get updates when you regenerate views."
@@ -12,11 +12,9 @@ module Cardboard
       end
 
       def validate_model_exists
-        begin
-          fields
-        rescue Exception => e
-          raise "Model #{singular_table_name.classify} does not exist, or there's no database. Try running `rails g model #{singular_table_name.classify}`"
-        end
+        fields
+      rescue Exception => e
+        raise "Model #{singular_table_name.classify} does not exist, or there's no database. Try running `rails g model #{singular_table_name.classify}`"
       end
 
       def generate_controller_file
@@ -42,11 +40,16 @@ module Cardboard
       end
 
       def fields
-        @_fields ||= singular_table_name.classify.constantize.column_names.reject{|k| %w[created_at].include?(k) || k.empty?}
+        @_fields ||= singular_table_name.classify.constantize.column_names
+          .reject do |column_name|
+            column_name.empty? || column_name == "created_at"
+          end
       end
+
       def plural_table_name
         @_plural_table_name ||= singular_table_name.pluralize
       end
+
       def singular_table_name
         @_singular_table_name ||= resource_name.to_s.singularize.underscore
       end
@@ -55,7 +58,6 @@ module Cardboard
       def controller_name
         "cardboard/#{plural_table_name}_controller"
       end
-
     end
   end
 end
