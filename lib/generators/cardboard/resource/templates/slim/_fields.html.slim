@@ -1,3 +1,9 @@
+<% unless options.overwrite %>
+/!
+  Do not edit these files they will be overwritted when you regenerate
+  views. To edit views use "Deface" or run the generator in overwrite mode.
+<% end %>
+
 <% for field in fields.reject{|k| %w[id updated_at created_at].include?(k)} %>= <% if field[/_id$/] %>f.association :<%= field[0..-4] %><% else %>f.input :<%= field %><% end %> 
 <% end %>
 .form-actions

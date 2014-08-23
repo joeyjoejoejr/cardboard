@@ -166,8 +166,21 @@ To add an admin area for a model simply type (make sure the model exists first a
 rails g cardboard:resource model_name
 ```
 
-Then customize the `controllers/cardboard/model_name_controller.rb` and associated views to your heart's desire.
+This will generate files to the `vendor/cardboard/views` directory. **Do Not
+Change These** Any Changes you make will be overwritten when you upgrade your
+cardboard version.
 
+If you would like to customize your views, use Deface or you can generate the
+files into your app directory by running the following command:
+
+```sh
+rails g cardboard:resource model_name --overwrite
+```
+Note: This should be done when your cardboard resource views need heavy
+customization. You will no longer get view updates when updating cardboard
+
+To generate `.slim` files use the same commands above with the flag
+`--markup=slim`
 
 The default cardboard resource scaffold help you quickly get started by making the most of the following gems.
 

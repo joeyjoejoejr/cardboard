@@ -1,3 +1,9 @@
+<% unless options.overwrite %>
+/!
+  Do not edit these files they will be overwritted when you regenerate
+  views. To edit views use "Deface" or run the generator in overwrite mode.
+<% end %>
+
 = cardboard_filters <%= singular_table_name.classify %>, :<%= fields.reject{|k| k[/(_at|^id)$/]}.first %>
 
 .table-responsive

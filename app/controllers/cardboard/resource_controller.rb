@@ -5,7 +5,7 @@ class Cardboard::ResourceController <  Cardboard::ApplicationController
 
   defaults :route_prefix => 'cardboard'
 
-  before_filter :check_ability
+  before_filter :check_ability, :set_view_paths
 
   def self.singular?
     name = controller_name
@@ -33,6 +33,10 @@ private
     @menu = {priority: 999, label: self.controller_name.to_s.titleize} if @menu.nil? #menu might be false, so no ||=
     return @menu if hash.nil?
     @menu = hash.is_a?(Hash) ? @menu.merge(hash) : hash
+  end
+
+  def set_view_paths
+    append_view_path Rails.root.join('vendor', 'cardboard', 'views')
   end
 
   def check_ability

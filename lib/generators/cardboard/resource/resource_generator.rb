@@ -4,7 +4,8 @@ module Cardboard
       desc "Scaffold a Cardboard resource"
       argument :resource_name, :type => :string
       #TODO: option for haml
-      class_option  :markup, :type => :string, :default => "slim"
+      class_option  :markup, type: :string, default: "erb", desc: "Erb and slim available"
+      class_option  :overwrite, type: :boolean, default: false , desc: "Use to overwrite default views. You will not get updates when you regenerate views."
 
       def self.source_root
         @_cardboard_source_root ||= File.expand_path("../templates", __FILE__)
@@ -31,6 +32,14 @@ module Cardboard
       end
 
       private
+
+      def view_path
+        if options.overwrite
+          "app/views/cardboard"
+        else
+          "vendor/cardboard/views/cardboard"
+        end
+      end
 
       def fields
         @_fields ||= singular_table_name.classify.constantize.column_names.reject{|k| %w[created_at].include?(k) || k.empty?}
