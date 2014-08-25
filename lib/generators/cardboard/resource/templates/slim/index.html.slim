@@ -9,15 +9,15 @@
 .table-responsive
   table class="table table-striped"
     tr
-      <% for field in fields %>th= sort_link @q, :<%= field %>
+      <% for field in fields %>th.<%= field %>-head = sort_link @q, :<%= field %>
       <% end %>
-      th Actions
+      th.actions-head Actions
 
     - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
       tr
-        <% for field in fields %>td = <% if field[/_at$/] %>l <% end %><%= singular_table_name %>.<%= field %>
+        <% for field in fields %>td.<%= field %>-cell = <% if field[/_at$/] %>l <% end %><%= singular_table_name %>.<%= field %>
         <% end %>
-        td
+        td.actions-cell
           = link_to 'Edit', edit_cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>)
           = " | "
           = link_to 'Delete', cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>), data: { confirm: 'Are you sure?'}, :method => :delete

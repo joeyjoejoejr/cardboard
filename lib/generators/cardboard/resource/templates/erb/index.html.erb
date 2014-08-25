@@ -8,18 +8,18 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-    <% for field in fields %><th>
+      <% for field in fields %><th class="<%= field %>-head">
       <%%= sort_link @q, :<%= field %> %>
     </th>
     <% end %>
-    <th>Actions</th>
+    <th class="actions-head">Actions</th>
     </tr>
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
       <tr>
-        <% for field in fields %><td>
+        <% for field in fields %><td class="<%= field %>-cell">
           <%%= <% if field[/_at$/] %>l <% end %><%= singular_table_name %>.<%= field %> %>
         </td>
-        <% end %><td>
+        <% end %><td class="actions-cell">
           <%%= link_to 'Edit', edit_cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>) %>
           <%%= " | " %>
           <%%= link_to 'Delete', cardboard_<%= singular_table_name %>_path(<%= singular_table_name %>), data: { confirm: 'Are you sure?' }, method: :delete %>
